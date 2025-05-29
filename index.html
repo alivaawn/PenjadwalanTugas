@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penjadwalan Tugas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  <style>
+    @media print {
+      body * { visibility: hidden; }
+      #printArea, #printArea * { visibility: visible; }
+      #printArea { position: absolute; left: 0; top: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body class="bg-pink-50 min-h-screen p-6 font-sans">
+
+  <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl p-8 space-y-6">
+    <h2 class="text-3xl font-bold text-center text-pink-700">📋 Penjadwalan Tugas</h2>
+
+    <form id="taskForm" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <label for="taskInput" class="block text-sm font-medium text-pink-700">Task:</label>
+        <input type="text" id="taskInput" required
+               class="w-full mt-1 p-3 border border-pink-300 rounded-xl bg-pink-50 focus:outline-none focus:ring-2 focus:ring-pink-400" />
+      </div>
+
+      <div>
+        <label for="deadlineInput" class="block text-sm font-medium text-pink-700">Deadline:</label>
+        <input type="date" id="deadlineInput" required
+               class="w-full mt-1 p-3 border border-pink-300 rounded-xl bg-pink-50 focus:outline-none focus:ring-2 focus:ring-pink-400" />
+      </div>
+
+      <div>
+        <label for="priorityInput" class="block text-sm font-medium text-pink-700">Priority:</label>
+        <select id="priorityInput" required
+                class="w-full mt-1 p-3 border border-pink-300 rounded-xl bg-pink-50 focus:outline-none focus:ring-2 focus:ring-pink-400">
+          <option value="" disabled selected>Pilih prioritas</option>
+          <option value="10">10 - Sangat Tinggi</option>
+          <option value="7">7 - Tinggi</option>
+          <option value="5">5 - Sedang</option>
+          <option value="3">3 - Rendah</option>
+          <option value="1">1 - Sangat Rendah</option>
+        </select>
+      </div>
+
+      <div class="flex items-end">
+        <button type="submit"
+                class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-xl shadow">
+          ➕ Tambah Tugas
+        </button>
+      </div>
+    </form>
+
+    <div class="flex flex-col sm:flex-row justify-between items-center mt-6">
+      <h2 class="text-xl font-semibold text-pink-700 mb-2 sm:mb-0">🗂️ Daftar Tugas</h2>
+      <div class="space-x-2">
+        <button id="sortPriorityBtn"
+                class="bg-purple-400 hover:bg-purple-500 text-white px-4 py-2 rounded-xl shadow transition">🔽 Prioritas</button>
+        <button id="sortDeadlineBtn"
+                class="bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-xl shadow transition">📅 Deadline</button>
+        <button id="clearTasksBtn"
+                class="bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded-xl shadow transition">🗑️ Hapus Semua</button>
+      </div>
+    </div>
+
+    <div id="printArea" class="overflow-x-auto rounded-xl border border-pink-200">
+      <table class="min-w-full bg-white" id="tasksTable">
+        <thead>
+          <tr class="bg-pink-200 text-pink-800 text-left text-sm uppercase tracking-wide">
+            <th class="py-3 px-4 border-b border-pink-300">Task</th>
+            <th class="py-3 px-4 border-b border-pink-300">Deadline</th>
+            <th class="py-3 px-4 border-b border-pink-300">Priority</th>
+          </tr>
+        </thead>
+        <tbody class="text-pink-900"></tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
